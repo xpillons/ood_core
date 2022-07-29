@@ -24,7 +24,7 @@ module OodCore
         attr_accessor :guac_spool
 
         def initialize(opts = {})
-          @guac_spool = '/anfhome/guac-spool'
+          @guac_spool = (ENV['GUAC_SPOOLER_DIRECTORY'] || "/anfhome/guac-spool")
         end
 
         # Submit a job with the attributes defined in the job template instance
