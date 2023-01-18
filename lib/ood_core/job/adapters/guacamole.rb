@@ -226,6 +226,11 @@ module OodCore
               status = 'undetermined'
             end
 
+            starttime = json['starttime'].to_i
+            wallclock_time= 0
+            if starttime > 0
+              wallclock_time= Time.now.to_i - starttime
+            end
             Info.new(
               id: File.basename(filename, File.extname(filename)), 
               status: status, 
@@ -233,7 +238,7 @@ module OodCore
               job_owner: json['user'],
               queue_name: json['queuename'],
               allocated_nodes: [ { name: json['hostname'], procs: nil } ],
-              wallclock_time: Time.now.to_i - json['starttime'].to_i,
+              wallclock_time: wallclock_time,
               wallclock_limit: json['walltime'],
               dispatch_time: json['starttime'],
               connection_id: json['connection_id'],
