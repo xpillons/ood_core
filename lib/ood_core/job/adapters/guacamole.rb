@@ -232,6 +232,12 @@ module OodCore
               job_name: json['jobname'],
               job_owner: json['user'],
               queue_name: json['queuename'],
+              allocated_nodes: [ { name: json['hostname'], procs: nil } ],
+              wallclock_time: Time.now.to_i - json['starttime'].to_i,
+              wallclock_limit: json['walltime'],
+              dispatch_time: json['starttime'],
+              connection_id: json['connection_id'],
+              client_id: json['client_id'],
               native: json
             )
           end
